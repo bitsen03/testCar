@@ -1,0 +1,122 @@
+html {
+  box-sizing: border-box;
+}
+*, *::after, *::before{
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+html,
+body{
+  height: 100%;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  list-style-type: none; /* Убираем маркеры */
+ }
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0 10px;
+  text-align: center;
+}
+
+body {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+}
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cards {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px; 
+}
+.card {
+  border: 1px rgb(0, 102, 255) inset;
+  display: flex;
+  flex-direction: column;
+}
+.sectionCards{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.info-card {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  margin-bottom: 20px;
+  flex: 1;
+  padding: 20px 5px 0 5px;
+  justify-content: center;
+}
+.name_card, .mouth-prace-car{
+  font-size: 24px;
+  font-weight: 700;
+}
+.full-prace-car{
+  font-size: 16px;
+  font-weight: 400;
+}
+.details_card{
+  color: rgb(0, 102, 255);
+  font-weight: 400;
+  border-top: 1px rgb(0, 102, 255) inset;
+  padding: 2px 0;
+}
+
+.modal {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.unActive {
+  display: none;
+}
+.modal_content {
+  padding: 20px;
+  border-radius: 20px;
+  background-color: white;
+
+}
+.qwe {
+  width: 400px;
+  height: 500px;
+}
+
+@media screen and (max-width: 800px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 500px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 310px) {
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
