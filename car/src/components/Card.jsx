@@ -18,7 +18,7 @@ const Card = ({children}) => {
                 <p className="full-prace-car">starting from ${price}</p>
             </div>
             <p className="details_card" onClick={openModal}>see details</p>
-            <SeeDetalisModal modalActive={modalActive} setModalActive={setModalActive}>{children}</SeeDetalisModal>
+           { modalActive ? <SeeDetalisModal modalActive={modalActive} setModalActive={setModalActive}>{children}</SeeDetalisModal> : null}
         </div>
     );
 }
