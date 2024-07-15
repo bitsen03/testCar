@@ -1,56 +1,56 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Card from "./Card.jsx";
+import { selectCards, addCards } from "../redux/allCardSlise.js";
 
 const AllCards = () => {
-const [cards, setCards] = useState(null);
- 
-useEffect(() => {
+  const objCard = useSelector(selectCards);
+  const cards = Object.values(objCard) 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
     const fetchData = async () => {
-        try {
-            const response = await fetch('https://test.tspb.su/test-task/vehicles');
-            const data = await response.json()
-            setCards(data)
-        } catch(err){
-            throw(err);
-        }
-    }
+      try {
+        const response = await fetch('https://test.tspb.su/test-task/vehicles');
+        const data = await response.json();
+        dispatch(addCards(data));
+      } catch(err) {
+        console.error('Error fetching data:', err);
+      }
+    };
+
     fetchData();
-}, []);
+  }, [dispatch]);
 
-const sortByYear = () => {
-    if (!cards) return; 
+  const sortByYear = useCallback(() => {
+    if (!cards) return;
     const sortedCards = [...cards].sort((a, b) => +a.year - +b.year);
-    setCards(sortedCards);
-  };
+  }, [cards]);
 
-  const sortByPrice = () => {
-    if (!cards) return; 
+  const sortByPrice = useCallback(() => {
+    if (!cards) return;
     const sortedCards = [...cards].sort((a, b) => +a.price - +b.price);
-    setCards(sortedCards);
-  };
-  const sortBy = () => {
-    if (!cards) return; 
-    const sortedCards = [...cards].sort((a, b) => a.price + b.price);
-    setCards(sortedCards);
-  };
+  }, [cards]);
 
-return (
+  return (
     <div>
-        <div className="sort">
+      <div className="sort">
         <div className="sort-btn" onClick={sortByYear}>
-        <a>Old Car</a>
-    </div>
-    <div className="sort-btn" onClick={sortByPrice}>
-        <a>Cheap Car</a>
-    </div>
+          <a>Old Car</a>
         </div>
-    <dir className='sectionCards' onClick={sortByYear}>
+        <div className="sort-btn" onClick={sortByPrice}>
+          <a>Cheap Car</a>
+        </div>
+      </div>
+      <div className='sectionCards'>
         <div className="cards">
-            {cards?.map((el) =><Card key={el.id}>{el}</Card>)}
+          {cards?.map((el) => (
+            <Card key={el.id}>{el}</Card>
+          ))}
         </div>
-   </dir> 
-</div>
-);
-}
+      </div>
+    </div>
+  );
+};
 
 export default AllCards;

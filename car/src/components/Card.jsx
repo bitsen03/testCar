@@ -6,6 +6,8 @@ const Card = ({children}) => {
     const [modalActive, setModalActive] = useState(false);
     const fullNameCar = `${name} ${year}`;
 
+    
+
     const openModal = () => {
         setModalActive(true);
     }

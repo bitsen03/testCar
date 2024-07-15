@@ -113,6 +113,7 @@ body {
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 .sort {
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -123,7 +124,13 @@ body {
   padding: 10px;
   border-radius: 8px;
 }
-
+.inputModal {
+  padding: 5px;
+  border-radius: 8px;
+}
+.padd {
+  margin: 10px 20% 0;
+}
 @media screen and (max-width: 800px) {
   .cards {
     grid-template-columns: repeat(3, 1fr);
