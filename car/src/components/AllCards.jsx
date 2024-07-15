@@ -1,12 +1,12 @@
-import React, { useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Card from "./Card.jsx";
-import { selectCards, addCards } from "../redux/allCardSlise.js";
+import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Card from './Card.jsx';
+import { selectCards, addCards } from '../redux/allCardSlise.js';
 
 const AllCards = () => {
   const objCard = useSelector(selectCards);
-  const cards = Object.values(objCard) 
   const dispatch = useDispatch();
+  const [sortedCards, setSortedCards] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,7 +14,7 @@ const AllCards = () => {
         const response = await fetch('https://test.tspb.su/test-task/vehicles');
         const data = await response.json();
         dispatch(addCards(data));
-      } catch(err) {
+      } catch (err) {
         console.error('Error fetching data:', err);
       }
     };
@@ -22,29 +22,35 @@ const AllCards = () => {
     fetchData();
   }, [dispatch]);
 
+  useEffect(() => {
+    setSortedCards(Object.values(objCard));
+  }, [objCard]);
+
   const sortByYear = useCallback(() => {
-    if (!cards) return;
-    const sortedCards = [...cards].sort((a, b) => +a.year - +b.year);
-  }, [cards]);
+    setSortedCards((prevCards) => 
+      [...prevCards].sort((a, b) => +a.year - +b.year)
+    );
+  }, []);
 
   const sortByPrice = useCallback(() => {
-    if (!cards) return;
-    const sortedCards = [...cards].sort((a, b) => +a.price - +b.price);
-  }, [cards]);
+    setSortedCards((prevCards) => 
+      [...prevCards].sort((a, b) => +a.price - +b.price)
+    );
+  }, []);
 
   return (
     <div>
       <div className="sort">
         <div className="sort-btn" onClick={sortByYear}>
-          <a>Old Car</a>
+          <a>New Car</a>
         </div>
         <div className="sort-btn" onClick={sortByPrice}>
           <a>Cheap Car</a>
         </div>
       </div>
-      <div className='sectionCards'>
+      <div className="sectionCards">
         <div className="cards">
-          {cards?.map((el) => (
+          {sortedCards?.map((el) => (
             <Card key={el.id}>{el}</Card>
           ))}
         </div>
