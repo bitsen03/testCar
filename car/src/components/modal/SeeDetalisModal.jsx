@@ -1,7 +1,8 @@
 import MyMapComponent from './MapComponent.jsx'
 import React, { useMemo, useState} from "react";
 import { useDispatch } from 'react-redux';
-import { updateCards } from '../../redux/allCardSlise.js';
+import { updateCard, removeCard } from '../../redux/allCardSlise.js';
+import { FaTrash } from "react-icons/fa6";
 
 const SeeDetalisModal = ({setModalActive, modalActive, children}) => {
     const dispatch = useDispatch();
@@ -28,9 +29,14 @@ const SeeDetalisModal = ({setModalActive, modalActive, children}) => {
         e.stopPropagation();
     };
 
-    const updateCard = () => {
+    const handleUpdateCard = () => {
         const newValue = {model: modelI, name: nameI, price: priceI, year: yearI, color: colorI}
-        dispatch(updateCards({values: newValue, id}))
+        dispatch(updateCard({values: newValue, id}))
+        setModalActive(false);
+    }
+
+    const handleDeleteCard = () => {
+        dispatch(removeCard({id}));
     }
 
     return (
@@ -39,10 +45,11 @@ const SeeDetalisModal = ({setModalActive, modalActive, children}) => {
             <div className="info-card modal-info">
                 <p>Model: <input className='inputModal' placeholder={modelI} onChange={(e) => setModel(e.target.value)}></input></p>
                 <p>Car: <input className='inputModal' placeholder={nameI} onChange={(e) => setName(e.target.value)}></input></p>
-                <p>Year:<input className='inputModal' placeholder={yearI} onChange={(e) => setYear(e.target.value)}></input></p>
+                <p>Year: <input className='inputModal' placeholder={yearI} onChange={(e) => setYear(e.target.value)}></input></p>
                 <p>Color: <input className='inputModal' placeholder={colorI} onChange={(e) => setColor(e.target.value)}></input></p>
                 <p>Price: <input className='inputModal' placeholder={priceI} onChange={(e) => setPrice(e.target.value)}></input></p>
-                <button className='sort-btn padd' onClick={updateCard}>Update</button>
+                <button className='sort-btn padd' onClick={handleUpdateCard}>Update</button>
+                <button className='delete-card' onClick={handleDeleteCard}><FaTrash /></button>
             </div>
             <MyMapComponent width={400} height={400} options={options}/>
             </div>

@@ -11,11 +11,11 @@ const cardSlice = createSlice({
         addCards: (state, {payload}) => {
             payload.forEach((el) => state.cards[el.id] = el)
         },
-        removeCards: (state, {payload}) => {
-            const {id, index} = payload;
-            state.cards[id].splice(index, 1)
+        removeCard: (state, {payload}) => {
+            const {id} = payload;
+            delete state.cards[id]
         },
-        updateCards: (state, {payload}) => {
+        updateCard: (state, {payload}) => {
             const {id, values} = payload;
             Object.entries(values).forEach(([key, value]) => state.cards[id][key] = value)
         },
@@ -25,5 +25,5 @@ const cardSlice = createSlice({
 export const selectCards = state => state.allCard.cards;
 export const selectTasksId = (state, id) => state.task.task[id];
 export const selectCompletTasksId = (state, id, index) => state.task.task[id][index].completeTask
-export const {addCards, removeCards, updateCards } = cardSlice.actions;
+export const {addCards, removeCard, updateCard } = cardSlice.actions;
 export default cardSlice.reducer;

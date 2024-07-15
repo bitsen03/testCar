@@ -108,6 +108,7 @@ body {
   border-radius: 8px;
   padding-bottom: 20px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 .leaflet-container {
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
@@ -123,6 +124,10 @@ body {
   color: white;
   padding: 10px;
   border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+.sort-btn:hover {
+  transform: scale(1.1);
 }
 .inputModal {
   padding: 5px;
@@ -131,6 +136,21 @@ body {
 .padd {
   margin: 10px 20% 0;
 }
+.delete-card {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  border-radius: 8px;
+  padding: 2px;
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s ease;
+}
+
+.delete-card:hover {
+  transform: scale(1.1);
+}
+
 @media screen and (max-width: 800px) {
   .cards {
     grid-template-columns: repeat(3, 1fr);
