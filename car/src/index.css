@@ -112,6 +112,17 @@ body {
 .leaflet-container {
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
+.sort {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.sort-btn {
+  background-color: rgba(0, 102, 255, 0.658);
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+}
 
 @media screen and (max-width: 800px) {
   .cards {

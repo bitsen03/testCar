@@ -9,10 +9,6 @@ useEffect(() => {
         try {
             const response = await fetch('https://test.tspb.su/test-task/vehicles');
             const data = await response.json()
-
-            fetch('', 
-                {}
-            )
             setCards(data)
         } catch(err){
             throw(err);
@@ -21,13 +17,39 @@ useEffect(() => {
     fetchData();
 }, []);
 
+const sortByYear = () => {
+    if (!cards) return; 
+    const sortedCards = [...cards].sort((a, b) => +a.year - +b.year);
+    setCards(sortedCards);
+  };
+
+  const sortByPrice = () => {
+    if (!cards) return; 
+    const sortedCards = [...cards].sort((a, b) => +a.price - +b.price);
+    setCards(sortedCards);
+  };
+  const sortBy = () => {
+    if (!cards) return; 
+    const sortedCards = [...cards].sort((a, b) => a.price + b.price);
+    setCards(sortedCards);
+  };
+
 return (
-   <dir className='sectionCards'>
+    <div>
+        <div className="sort">
+        <div className="sort-btn" onClick={sortByYear}>
+        <a>Old Car</a>
+    </div>
+    <div className="sort-btn" onClick={sortByPrice}>
+        <a>Cheap Car</a>
+    </div>
+        </div>
+    <dir className='sectionCards' onClick={sortByYear}>
         <div className="cards">
             {cards?.map((el) =><Card key={el.id}>{el}</Card>)}
         </div>
    </dir> 
-
+</div>
 );
 }
 
